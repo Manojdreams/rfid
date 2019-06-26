@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HTTP } from '@ionic-native/http/ngx';
 import { MenuController, AlertController } from '@ionic/angular';
 import { LoadingService } from '../home/loading.service';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +12,29 @@ import { LoadingService } from '../home/loading.service';
 })
 export class LoginPage {
   reference: string = '';
-  constructor(private router: Router, public alertController:AlertController, private http: HTTP, public menuCtrl: MenuController, public loading: LoadingService) {
+  constructor(private router: Router, public oneSignal: OneSignal,public alertController:AlertController, private http: HTTP, public menuCtrl: MenuController, public loading: LoadingService) {
     this.menuCtrl.swipeEnable(false);
+    this.oneSignal.startInit('969df786-b9ce-40ff-9895-c09317b5b212', '798936048747');
+
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
+
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+    this.oneSignal.endInit();
+    this.oneSignal.getIds().then(token => {
+      localStorage.setItem('onesignal_token',JSON.stringify(token))
+      console.log(token);
+    });
     // this.menuCtrl.
   }
 
-  ngOnInit() {
-
+  ngOnInit(){
+    
   }
   signIn(){
     if (this.reference!=''){

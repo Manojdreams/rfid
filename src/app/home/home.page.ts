@@ -73,21 +73,22 @@ export class HomePage {
   }
 
   ngOnInit(){
-    // this.oneSignal.startInit('969df786-b9ce-40ff-9895-c09317b5b212', '798936048747');
+    this.oneSignal.startInit('969df786-b9ce-40ff-9895-c09317b5b212', '798936048747');
 
-    // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.InAppAlert);
 
-    // this.oneSignal.handleNotificationReceived().subscribe(() => {
-    //   // do something when notification is received
-    // });
+    this.oneSignal.handleNotificationReceived().subscribe(() => {
+      // do something when notification is received
+    });
 
-    // this.oneSignal.handleNotificationOpened().subscribe(() => {
-    //   // do something when a notification is opened
-    // });
-    // this.oneSignal.endInit();
-    // this.oneSignal.getIds().then(token => {
-    //   console.log(token);
-    // });
+    this.oneSignal.handleNotificationOpened().subscribe(() => {
+      // do something when a notification is opened
+    });
+    this.oneSignal.endInit();
+    this.oneSignal.getIds().then(token => {
+      localStorage.setItem('onesignal_token',JSON.stringify(token))
+      console.log(token);
+    });
   }
   segmentChanged(ev: any) {
     console.log(ev)

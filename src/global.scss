@@ -15,17 +15,19 @@
     background: #FFF !important;
     border-radius: 10px !important;
     height: 60px !important;
-    font-size: 1.25em !important;
+    font-size: 18px !important;
     color: #AEABD5 !important;
+    margin-right: 10px;
     border: 1px solid transparent;
 }
 
-.searchbar-search-icon.sc-ion-searchbar-md {
+.searchbar-search-icon.sc-ion-searchbar-md,.searchbar-search-icon.sc-ion-searchbar-ios  {
    color: #AEABD5 !important;
-    font-size: 30px !important;
+    font-size: 25px !important;
     top: 15px;
-        width: 30px;
-    height: 30px;
+     width: 30px;
+        
+     height: 30px;
   }
 
 //   .item-native{

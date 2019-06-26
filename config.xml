@@ -89,4 +89,5 @@
     <plugin name="cordova-plugin-advanced-http" spec="^2.1.1" />
     <plugin name="onesignal-cordova-plugin" spec="^2.4.7" />
     <engine name="android" spec="7.0.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

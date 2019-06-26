@@ -40,7 +40,7 @@ export class AppComponent {
     public menuCtrl  : MenuController,
   ) {
     this.initializeApp();
-    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+   
   }
 
   initializeApp() {
@@ -50,6 +50,7 @@ export class AppComponent {
       this.splashScreen.hide();
       if (localStorage.getItem("login")) {
         console.log("home")
+        this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
         this.router.navigateByUrl('/home');
       }
       else{
@@ -71,6 +72,7 @@ export class AppComponent {
     });
     this.oneSignal.endInit();
     this.oneSignal.getIds().then(token => {
+      localStorage.setItem('onesignal_token',JSON.stringify(token))
       console.log(token);
     });
   }
@@ -105,5 +107,9 @@ export class AppComponent {
   }
   closeMenu(){
     this.menuCtrl.close();
+  }
+
+  menuOpened(){
+    this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
   }
 }
