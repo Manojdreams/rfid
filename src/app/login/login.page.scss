@@ -1,0 +1,73 @@
+.welcome-card ion-img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+.welcome-card{
+  margin: 10%;
+  background-color: #EBE9FF;
+  height: 220px;
+}
+
+.logo-block{
+  margin-top:20%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.logo{
+  height:50px;
+  width:100px;
+  margin-left: auto;
+  margin-right: auto;
+} 
+.home-icon{
+  height: 30px;
+  width: 30px;
+  margin-top: 15px;
+}
+
+.login-item{
+  margin-top:30px;
+  --ion-background-color: transparent;
+}
+.login-title{
+  text-align: center;
+  color: #B1B1D2;
+  border-bottom: 3px solid #B1B1D2;
+  font-size: 18px;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 10px;
+}
+
+.login-button{
+  width: 80%;
+  margin-left: 10%;
+  margin-right: auto;
+  height: 44px;
+}
+
+.item-inner {
+    flex-direction: row-reverse !important;
+  }
+  ion-icon {
+    color: black !important;
+    margin: 15px -13px -33px 0 !important;
+    background-color: transparent;
+    font-size: 27px;
+    padding: 0px 7px 12px 0px;
+  }
+
+  .item-has-focus .label-floating.sc-ion-label-md-h {
+    color: black !important;
+  }
+  .label-floating.sc-ion-label-md-h{
+    color: #B1B1D2;
+  }
+ion-content{
+  --background: #fff url('../../assets/images/login-screen.png') no-repeat center center / cover;
+}

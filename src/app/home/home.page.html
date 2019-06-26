@@ -1,44 +1,112 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
+  <ion-toolbar class="home-header">
+    <ion-buttons slot="end">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>
-      Home
+      Dashboard
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
+<ion-content class="home-content">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="0.5" pullMin="100" pullMax="200">
+    <ion-refresher-content pullingIcon="arrow-dropdown" refreshingSpinner="circles"></ion-refresher-content>
+  </ion-refresher>
+  <ion-card class="profile-name-div">
+  </ion-card>
+  <div class="profile-name-bg">
+    <ion-img src="/assets/images/Group.png"></ion-img>
+    <ion-row class="profile-img-row">
+      <ion-col>
+        <ion-avatar class="image-avatar">
+          <ion-img class="profile-image" style="border-radius: 50%" src="/assets/images/profile-pic.jpg"></ion-img>
+        </ion-avatar>
+      </ion-col>
+      <ion-col>
+        <h2 class="profile-name" text-wrap>{{userInfo.fname}}</h2>
+        <h2 class="profile-id" text-wrap>RFID{{userInfo.idno}}</h2>
+      </ion-col>
+    </ion-row>
+  </div>
+  <ion-searchbar class="search" placeholder="Type by Date / Message"></ion-searchbar>
+  <ion-card class="welcome-card">
+    <ion-segment [(ngModel)]="category" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="announcement">
+        <ion-label>Announcements</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="log">
+        <ion-label>Logs</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <ion-list *ngIf="isEnabled('announcement')">
+      <ion-grid *ngIf="data != null">
+        <ion-row>
+          <ion-col col-11 offset-1>
+            <ion-list margin-top scrollX="true" *ngIf="!noAnnouncement">
+              <div item-thumbnail margin-bottom *ngFor="let item of announcements; let i= index"
+                (click)="onEvent('onItemClick', item, $event)">
+                <ion-row>
+                  <ion-col class="time-col">
+                    <span item-right>
+                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
+                      <h2 class="date" text-wrap>{{item.reciever}}</h2>
+                    </span>
+                  </ion-col>
+                  <div class="item-thumbnail" item-start>
+                  </div>
+                  <div class="item-thumbnail1" item-start>
+                  </div>
+                  <ion-col>
+                    <div class="notification-div">
+                      <h2 class="notification" text-wrap>{{item.message}}</h2>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-list>
+            <ion-list margin-top scrollX="true" *ngIf="noAnnouncement">
+              <h2 class="date" text-wrap>No Logs Found</h2>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </ion-list>
+    <ion-list *ngIf="isEnabled('log')">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-11 offset-1>
+            <ion-list margin-top scrollX="true" *ngIf="!noLog">
+              <div item-thumbnail margin-bottom *ngFor="let item of logs; let i= index"
+                (click)="onEvent('onItemClick', item, $event)">
+                <ion-row>
+                  <ion-col class="time-col">
+                    <span item-right>
+                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
+                      <h2 class="date" text-wrap>{{item.reciever}}</h2>
+                    </span>
+                  </ion-col>
+                  <div class="item-thumbnail" item-start>
+                  </div>
+                  <div class="item-thumbnail1" item-start>
+                  </div>
+                  <ion-col>
+                    <div class="notification-div">
+                      <h2 class="notification" text-wrap>{{item.message}}</h2>
+                    </div>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-list>
+            <ion-list margin-top scrollX="true" *ngIf="noLog">
+              <h2 class="date" text-wrap>No Logs Found</h2>
+            </ion-list>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-list>
+
+  </ion-card>
+
+
 </ion-content>
