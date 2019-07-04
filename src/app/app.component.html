@@ -1,6 +1,6 @@
 <ion-app>
-  <ion-split-pane>
-    <ion-menu type="overlay" side="end" [swipeGesture]="false" (ionOpen)="menuOpened()">
+  <ion-split-pane  (click)="menuOpened()">
+    <ion-menu type="overlay" side="end" (click)="menuOpened()" [swipeGesture]="false">
       <ion-header>
         <ion-toolbar>
           <ion-title>Menu</ion-title>
@@ -15,32 +15,39 @@
         <ion-card class="profile-name-div">
         </ion-card>
         <div class="profile-name-bg">
-          <ion-img src="/assets/images/Group.png"></ion-img>
-          <ion-row class="profile-img-row">
-            <ion-col>
-              <ion-avatar class="image-avatar">
-                <ion-img class="profile-image" style="border-radius: 50%" src="/assets/images/profile-pic.jpg">
-                </ion-img>
-              </ion-avatar>
-            </ion-col>
-            <ion-col>
-              <h2 class="profile-name" text-wrap>{{userInfo.fname}}</h2>
-              <h2 class="profile-id" text-wrap>RFID{{userInfo.idno}}</h2>
-            </ion-col>
-          </ion-row>
+          <ion-avatar class="image-avatar">
+            <ion-img class="profile-image" style="border-radius: 50%"
+              onError="this.userInfo.client_logo='assets/images/user.jpg';" src="{{userInfo.client_logo}}">
+            </ion-img>
+          </ion-avatar>
+          <h2 class="profile-name" text-wrap>{{userInfo.lname}},{{userInfo.fname}} {{userInfo.mname}} {{userInfo.suffix}}.</h2>
         </div>
+        <div class="menuList">
         <ion-list class="menu-list" menuClose (click)="home()">
           <ion-img class="menu-icon" src="/assets/images/home.png"></ion-img>
           <ion-label menuClose class="menu-text">
             Home
           </ion-label>
         </ion-list>
-        <ion-list class="menu-list" menuClose (click)="logout()">
+        <ion-list class="menu-list" menuClose (click)="userGuide()">
+          <ion-img class="menu-icon" src="/assets/images/user-guide.png"></ion-img>
+          <ion-label menuClose class="menu-text">
+            User Guide
+          </ion-label>
+        </ion-list>
+        <ion-list *ngIf="login" class="menu-list" menuClose (click)="logout()">
           <ion-img class="menu-icon" src="/assets/images/logout.png"></ion-img>
           <ion-label menuClose class="menu-text">
             Logout
           </ion-label>
         </ion-list>
+        <ion-list *ngIf="!login" class="menu-list" menuClose (click)="loginPage()">
+          <ion-img class="menu-icon" src="/assets/images/logout.png"></ion-img>
+          <ion-label menuClose class="menu-text">
+            Login
+          </ion-label>
+        </ion-list>
+        </div>
       </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>

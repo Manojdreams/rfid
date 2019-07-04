@@ -18,6 +18,10 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: './login/login.module#LoginPageModule'
+  },
+  {
+    path: 'user-guide',
+    loadChildren: './user-guide/user-guide.module#UserGuidePageModule',
   }
 ];
 

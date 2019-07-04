@@ -1,0 +1,62 @@
+.welcome-card {
+  height: auto;
+  overflow: hidden;
+  --background: #F3F3F5 !important;
+  margin-top: 10%;
+  border-radius: 20px;
+  margin: 20px;
+}
+
+.log-list{
+  background: #F3F3F5 !important;
+}
+
+.header-md:after,.header-ios:after{
+  background : transparent !important;
+}
+.key-icon{
+    height: 40px;
+    width: 40px;
+    margin: 10px  ;
+}
+
+.new-background-color{
+  --background: #2A388F;
+}
+
+.profile-name-div{
+  height: 50px;
+  margin: 0;
+  --background: #2A388F !important;
+  border-radius: 0;
+  box-shadow: none;
+}
+.profile-name-bg{
+  background: #F3F3F5 !important;
+  margin: 10px;
+  border-radius: 10px;
+  height: 500px;
+  position: relative;
+  margin-top: -55px;
+}
+
+.menu-icon{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+  }
+
+.guide-title{
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.title-md ,.title-ios{
+    color: #ffffff !important;
+    font-weight: bold;
+  }
+  .text-field{
+    padding: 0px 25px;
+    font-size: 14px;
+    line-height: 1.5;
+  }

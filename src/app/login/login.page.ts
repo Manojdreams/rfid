@@ -12,6 +12,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 })
 export class LoginPage {
   reference: string = '';
+  token : any = '';
   constructor(private router: Router, public oneSignal: OneSignal,public alertController:AlertController, private http: HTTP, public menuCtrl: MenuController, public loading: LoadingService) {
     this.menuCtrl.swipeEnable(false);
     this.oneSignal.startInit('969df786-b9ce-40ff-9895-c09317b5b212', '798936048747');
@@ -27,22 +28,25 @@ export class LoginPage {
     });
     this.oneSignal.endInit();
     this.oneSignal.getIds().then(token => {
-      localStorage.setItem('onesignal_token',JSON.stringify(token))
+      localStorage.setItem('onesignal_token', JSON.stringify(token))
       console.log(token);
     });
-    // this.menuCtrl.
   }
 
-  ngOnInit(){
-    
-  }
+  
+  
   signIn(){
+    var token = JSON.parse(localStorage.getItem('onesignal_token'));
+    this.token = token.userId;
+    console.log(this.token);
     if (this.reference!=''){
       this.loading.present();
       var data = {
-        referencekey : this.reference
+        referencekey : this.reference,
+        device_id : this.token
       }
-      this.http.post('http://dreamguys.co.in/demo/rfid/api/login', data, {})
+      this.http.post('http://webbundyclock.com/RFIC_notification/api/login', data, {})
+      // this.http.post('http://172.16.1.164/rfid/api/login', data, {})
         .then(data => {
           var resp = JSON.parse(data.data);
           console.log(resp.message)
@@ -79,5 +83,9 @@ export class LoginPage {
     });
 
     await alert.present();
+  }
+
+  openUserGuide() {
+    this.router.navigateByUrl('/user-guide');
   }
 }

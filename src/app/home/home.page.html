@@ -1,7 +1,9 @@
 <ion-header>
-  <ion-toolbar class="home-header">
-    <ion-buttons slot="end">
-      <ion-menu-button></ion-menu-button>
+  <ion-toolbar class="home-header new-background-color">
+    <ion-buttons (click)="menuOpened()" slot="end">
+      <ion-menu-toggle (click)="menuOpened()">
+        <img class="menu-icon" src='assets/icon/menu.png'>
+      </ion-menu-toggle>
     </ion-buttons>
     <ion-title>
       Dashboard
@@ -16,20 +18,21 @@
   <ion-card class="profile-name-div">
   </ion-card>
   <div class="profile-name-bg">
-    <ion-img src="/assets/images/Group.png"></ion-img>
+    <ion-img style="height: 95px" src="/assets/images/Group.png"></ion-img>
     <ion-row class="profile-img-row">
-      <ion-col>
+      <ion-col size=3>
         <ion-avatar class="image-avatar">
-          <ion-img class="profile-image" style="border-radius: 50%" src="/assets/images/profile-pic.jpg"></ion-img>
+          <ion-img class="profile-image" style="border-radius: 50%" src="{{userInfo.client_logo}}"></ion-img>
         </ion-avatar>
       </ion-col>
       <ion-col>
-        <h2 class="profile-name" text-wrap>{{userInfo.fname}}</h2>
-        <h2 class="profile-id" text-wrap>RFID{{userInfo.idno}}</h2>
+        <h2 class="profile-name" text-wrap>{{userInfo.lname}} , {{userInfo.fname}} {{userInfo.mname}} {{userInfo.suffix}}.</h2>
+        <h2 class="profile-id" text-wrap>{{userInfo.idno}}</h2>
       </ion-col>
     </ion-row>
   </div>
-  <ion-searchbar class="search" placeholder="Type by Date / Message"></ion-searchbar>
+  <ion-searchbar #q class="search" (ionClear)="onCancel($event)" (keyup.enter)="search(q.value)" placeholder="Type by Date / Message"
+    [(ngModel)]="searchText"></ion-searchbar>
   <ion-card class="welcome-card">
     <ion-segment [(ngModel)]="category" (ionChange)="segmentChanged($event)">
       <ion-segment-button value="announcement">
@@ -39,17 +42,18 @@
         <ion-label>Logs</ion-label>
       </ion-segment-button>
     </ion-segment>
-    <ion-list *ngIf="isEnabled('announcement')">
-      <ion-grid *ngIf="data != null">
+    <ion-list *ngIf="isEnabled('announcement')" class="log-list">
+      <ion-grid class="log-list">
         <ion-row>
           <ion-col col-11 offset-1>
-            <ion-list margin-top scrollX="true" *ngIf="!noAnnouncement">
+            <ion-list margin-top scrollX="true" class="log-list" *ngIf="!noAnnouncement">
               <div item-thumbnail margin-bottom *ngFor="let item of announcements; let i= index"
                 (click)="onEvent('onItemClick', item, $event)">
                 <ion-row>
                   <ion-col class="time-col">
                     <span item-right>
                       <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
+                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortTime'}}</h2>
                       <h2 class="date" text-wrap>{{item.reciever}}</h2>
                     </span>
                   </ion-col>
@@ -72,17 +76,18 @@
         </ion-row>
       </ion-grid>
     </ion-list>
-    <ion-list *ngIf="isEnabled('log')">
+    <ion-list *ngIf="isEnabled('log')" class="log-list">
       <ion-grid>
         <ion-row>
           <ion-col col-11 offset-1>
-            <ion-list margin-top scrollX="true" *ngIf="!noLog">
+            <ion-list margin-top scrollX="true" *ngIf="!noLog" class="log-list">
               <div item-thumbnail margin-bottom *ngFor="let item of logs; let i= index"
                 (click)="onEvent('onItemClick', item, $event)">
                 <ion-row>
                   <ion-col class="time-col">
                     <span item-right>
                       <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
+                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortTime'}}</h2>
                       <h2 class="date" text-wrap>{{item.reciever}}</h2>
                     </span>
                   </ion-col>

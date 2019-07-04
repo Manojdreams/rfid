@@ -1,10 +1,16 @@
-.welcome-card ion-img {
+.welcome-card {
   height: auto;
   overflow: hidden;
-  --background: #ffffff !important;
+  --background: #F3F3F5 !important;
   margin-top: 10%;
-  border-radius: 15px;
+  border-radius: 20px;
+  margin: 10px;
 }
+
+.log-list{
+  background: #F3F3F5 !important;
+}
+
 .header-md:after,.header-ios:after{
   background : transparent !important;
 }
@@ -12,10 +18,15 @@
 //   min-height: 100px !important;
 //   height: 100px !important;
 // }
+
+.new-background-color{
+  --background: #2A388F;
+}
+
 .profile-name-div{
   height: 50px;
   margin: 0;
-  --background: #ffffff !important;
+  --background: #2A388F !important;
   border-radius: 0;
   box-shadow: none;
 }
@@ -23,7 +34,7 @@
   --background: #fff url('../../assets/images/Group.png') no-repeat center center / cover;
   margin: 10px;
   border-radius: 10px;
-  height: 80px;
+  height: 100px;
   position: relative;
   margin-top: -50px;
 }
@@ -36,13 +47,17 @@
     font-size: 18px;
     font-weight: 500;
     padding-bottom: 5px;
+    color: #000;
+    text-align: left;
 }
 .profile-img-row{
   position: absolute;
   top: 0;
+  padding: 10px;
   width: 100%;
-      border-radius: 15px;
-    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.2);
+  height: 83.4px;
+  border-radius: 15px;
+    box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
 }
 
 .profile-id{
@@ -51,7 +66,9 @@
     width: 100%;
     font-size: 18px;
     font-weight: 500;
-    color: #AEABD5;
+    color: #000;
+    text-align: left;
+    padding-left: 25%;
     padding-top: 5px;
 }
 
@@ -64,17 +81,17 @@
   }
 
   .image-avatar{
-    margin-left: auto;
+    margin-right: auto;
   }
 
-.home-content{
- --background: #EFEFEF;
-}
+// .home-content{
+//  --background: #EFEFEF;
+// }
 
 .sc-ion-segment-md-h ,.sc-ion-segment-ios-h {
-  --background: #fff;
-  --background-checked: #fff;
-  --color-checked:#7C72FF;
+  --background: #F3F3F5;
+  --background-checked: #F3F3F5;
+  --color-checked:#2A388F;
   height: 50px;
 }
 
@@ -95,7 +112,7 @@
       width: 16px;
       height: 16px;
       border-radius: 50%;
-      background: #fff;
+      background: #F3F3F5;
       border-width: 3px;
       border:#3CC62A solid !important;
       top:0;
@@ -143,6 +160,12 @@
     }
   }
 
+  .menu-icon{
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+  }
+
   .time-col{
     width: 35% !important;
   }
@@ -150,6 +173,7 @@
  .searchbar-input.sc-ion-searchbar-md{
     height: 56px !important;
     border-radius: 10px !important;
+    background: #F3F3F5 !important;
   }
   .searchbar-search-icon.sc-ion-searchbar-md {
     color:#AEABD5 !important;
@@ -176,7 +200,7 @@
   .notification-div{
     margin:10px;
     padding:10px;
-    background: #7C72FF;
+    background: #2A388F;
     // height: 200px;
     border-radius: 10px;
   }
@@ -191,7 +215,7 @@
   }
 
   .title-md ,.title-ios{
-    color: #7C72FF !important;
+    color: #ffffff !important;
     font-weight: bold;
   }
 
@@ -200,7 +224,7 @@
 
   }
   .segment-button-checked{
-    --color-checked:#7C72FF;
-    border-bottom: #7C72FF solid; 
+    --color-checked:#2A388F;
+    border-bottom: #2A388F solid; 
     border-bottom-width: 2px;
   }

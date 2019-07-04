@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
+import { HTTP } from '@ionic-native/http/ngx';
+import { LoadingService } from './home/loading.service';
 
 @Component({
   selector: 'app-root',
@@ -28,32 +30,37 @@ export class AppComponent {
       icon: 'list'
     },
   ];
+  login = false;
 
-  public userInfo:any={};
+  public userInfo: any = {};
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    public router : Router,
+    public router: Router,
+    private http: HTTP,
     private oneSignal: OneSignal,
-    public alertController :AlertController,
-    public menuCtrl  : MenuController,
+    public alertController: AlertController,
+    public loading: LoadingService,
+    public menuCtrl: MenuController,
   ) {
     this.initializeApp();
-   
+
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.overlaysWebView(false);
-      this.statusBar.backgroundColorByHexString('#7C72FF');
+      this.statusBar.backgroundColorByHexString('#2A388F');
       this.splashScreen.hide();
       if (localStorage.getItem("login")) {
         console.log("home")
+        this.login = true;
         this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
         this.router.navigateByUrl('/home');
       }
-      else{
+      else {
+        this.login = false;
         console.log("home")
         this.router.navigateByUrl('/login');
       }
@@ -72,14 +79,14 @@ export class AppComponent {
     });
     this.oneSignal.endInit();
     this.oneSignal.getIds().then(token => {
-      localStorage.setItem('onesignal_token',JSON.stringify(token))
+      localStorage.setItem('onesignal_token', JSON.stringify(token))
       console.log(token);
     });
   }
 
-   async logout(){
-     this.menuCtrl.close();
-     const alert = await this.alertController.create({
+  async logout() {
+    this.menuCtrl.close();
+    const alert = await this.alertController.create({
       header: 'Confirm!',
       message: 'You want to logout?',
       buttons: [
@@ -93,23 +100,88 @@ export class AppComponent {
         }, {
           text: 'Yes',
           handler: () => {
-            localStorage.clear();
-            this.router.navigateByUrl('/login');
+            var token = JSON.parse(localStorage.getItem('onesignal_token'));
+            var user_token = token.userId;
+            var user_info = JSON.parse(localStorage.getItem('userInfo'));
+            var user_reference = user_info.logger_id
+            this.loading.present();
+            var data = {
+              logger_id: user_reference,
+              device_id: user_token
+            }
+            this.http.post('http://webbundyclock.com/RFIC_notification/api/unset_deviceid', data, {})
+              // this.http.post('http://172.16.1.164/rfid/api/unset_deviceid', data, {})
+              .then(data => {
+                var resp = JSON.parse(data.data);
+                console.log(resp.message)
+                if (resp.message == "Device Removed successfully") {
+                  localStorage.removeItem('login')
+                  this.router.navigateByUrl('/login');
+                }
+                console.log(data.status);
+                console.log(data.data); // data received by server
+                console.log(data.headers);
+                this.loading.dismiss();
+                if (resp.message == "Invalid referencekey") {
+                  localStorage.removeItem('login')
+                  this.router.navigateByUrl('/login');
+                  this.presentAlert(resp.message);
+                }
+              })
+              .catch(error => {
+                console.log(error.status);
+                console.log(error.error); // error message as string
+                console.log(error.headers);
+                this.loading.dismiss();
+              });
           }
         }
       ]
     });
-     await alert.present();
+    await alert.present();
   }
-  home(){
+
+  async presentAlert(msg) {
+    const alert = await this.alertController.create({
+      header: 'RFID',
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+  home() {
     this.menuCtrl.close();
     this.router.navigateByUrl('/home');
   }
-  closeMenu(){
+
+  closeMenu() {
     this.menuCtrl.close();
   }
 
-  menuOpened(){
+  menuOpened() {
+    console.log("xabh")
     this.userInfo = JSON.parse(localStorage.getItem('userInfo'))
+    if (localStorage.getItem("login")) {
+      this.login = true;
+    }
+    else {
+      this.login = false;
+    }
+  }
+
+  loginPage() {
+    this.menuCtrl.close();
+    this.router.navigateByUrl('/login');
+  }
+  userGuide(){
+    this.menuCtrl.close();
+    this.router.navigateByUrl('/user-guide');
+  }
+
+  setDefaultPic() {
+    this.menuCtrl.close();
+    this.userInfo.client_logo = "assets/images/user.jpg";
+    console.log(this.userInfo)
   }
 }

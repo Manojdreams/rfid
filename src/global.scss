@@ -12,7 +12,7 @@
 
 
 .searchbar-input {
-    background: #FFF !important;
+    background: #F3F3F5  !important;
     border-radius: 10px !important;
     height: 60px !important;
     font-size: 18px !important;
@@ -28,6 +28,12 @@
      width: 30px;
         
      height: 30px;
+  }
+  .toolbar-background, ::slotted(ion-progress-bar){
+        background: #2A388F !important;
+  }
+  .toolbar-container{
+        background: #2A388F !important;
   }
 
 //   .item-native{

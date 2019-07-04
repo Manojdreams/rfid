@@ -5,23 +5,59 @@
 
 .welcome-card{
   margin: 10%;
-  background-color: #EBE9FF;
-  height: 220px;
+  margin-top: 0 !important;
+  margin-bottom: 2.5% !important;
+  box-shadow: none !important;
 }
 
 .logo-block{
-  margin-top:20%;
+  margin-top:10%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 50%;
+  width: 80%;
 }
 
-.logo{
-  height:50px;
-  width:100px;
+.logo-block1{
+  display: block;
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
+  margin-top: 15%;
+  margin-bottom: 15%;
+}
+.logo{
+  height: 75px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+} 
+.bottom-icon{
+    height: 40px;
+    position: absolute; 
+    bottom: 55px;
+}
+.bottom-text{
+    font-size: 14px;
+    text-align: center;
+    color: white;
+    margin: 5px;
+    position: absolute;
+    bottom: 30px;
+    width: 100%;
+    margin: 0 auto;
+}
+.online-text{
+    font-size: 22px;
+    text-align: center;
+    color: white;
+    margin: 5px;
+}
+.logo1{
+  height:200px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 } 
 .home-icon{
   height: 30px;
@@ -30,8 +66,8 @@
 }
 
 .login-item{
-  margin-top:30px;
   --ion-background-color: transparent;
+  border: none !important;
 }
 .login-title{
   text-align: center;
@@ -45,15 +81,27 @@
 }
 
 .login-button{
-  width: 80%;
-  margin-left: 10%;
+  width: 40%;
+  margin-left: 30%;
   margin-right: auto;
   height: 44px;
 }
 
 .item-inner {
     flex-direction: row-reverse !important;
+    border: none !important;
   }
+
+  .login-label-input{
+    color: white;
+    padding-left: 8px;
+    margin-top: 18px;
+  }
+ .login-input{
+      height: 50px;
+    background: #ffff;
+    border-radius: 10px;}
+
   ion-icon {
     color: black !important;
     margin: 15px -13px -33px 0 !important;
@@ -69,5 +117,5 @@
     color: #B1B1D2;
   }
 ion-content{
-  --background: #fff url('../../assets/images/login-screen.png') no-repeat center center / cover;
+  --background: linear-gradient(#272262, #213E9A) !important;
 }
