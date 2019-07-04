@@ -24,8 +24,21 @@
   background : transparent !important;
 }
 
+.scroll-content {
+  padding-bottom: 0 !important;
+}
 .side-menu{
    --background: linear-gradient(#2A388F, #1833d9) !important;
+}
+
+.header-ios ion-toolbar:last-child {
+  --border-width: 0px !important;
+}
+.searchbar-left-aligned.sc-ion-searchbar-ios-h .searchbar-input.sc-ion-searchbar-ios {
+  padding-left: 40px !important;
+}
+.searchbar-input-container.sc-ion-searchbar-ios{
+  height: 63px;
 }
 
 .profile-name-div{

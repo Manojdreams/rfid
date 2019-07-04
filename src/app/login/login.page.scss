@@ -34,15 +34,13 @@
 } 
 .bottom-icon{
     height: 40px;
-    position: absolute; 
-    bottom: 55px;
+  margin-top: 10%;
 }
 .bottom-text{
     font-size: 14px;
     text-align: center;
     color: white;
     margin: 5px;
-    position: absolute;
     bottom: 30px;
     width: 100%;
     margin: 0 auto;
@@ -68,6 +66,7 @@
 .login-item{
   --ion-background-color: transparent;
   border: none !important;
+  margin-right: 10px;
 }
 .login-title{
   text-align: center;
@@ -95,11 +94,13 @@
   .login-label-input{
     color: white;
     padding-left: 8px;
+    padding-right: 8px;
     margin-top: 18px;
   }
  .login-input{
       height: 50px;
     background: #ffff;
+    padding: 10px !important;
     border-radius: 10px;}
 
   ion-icon {

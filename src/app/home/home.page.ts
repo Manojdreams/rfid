@@ -65,6 +65,8 @@ export class HomePage {
   logs: any = [];
   noLog = true;
   searchText: any;
+   date = '10:39';
+
   noAnnouncement = true;
   constructor(private http: HTTP, public loading: LoadingService, public alertController: AlertController, public loadingController: LoadingController, private oneSignal: OneSignal) {
     this.category = 'announcement';
@@ -72,6 +74,8 @@ export class HomePage {
     console.log(this.userInfo);
     this.getAnnouncements();
     this.getLogs();
+    console.log(new Date())
+    console.log(new Date(this.date))
   }
 
   ngOnInit() {

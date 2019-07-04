@@ -80,8 +80,9 @@ export class AppComponent {
     this.oneSignal.endInit();
     this.oneSignal.getIds().then(token => {
       localStorage.setItem('onesignal_token', JSON.stringify(token))
-      console.log(token);
+      alert(token);
     });
+
   }
 
   async logout() {

@@ -27,7 +27,7 @@
       </ion-col>
       <ion-col>
         <h2 class="profile-name" text-wrap>{{userInfo.lname}} , {{userInfo.fname}} {{userInfo.mname}} {{userInfo.suffix}}.</h2>
-        <h2 class="profile-id" text-wrap>{{userInfo.idno}}</h2>
+        <h2 class="profile-id" text-wrap>{{userInfo.idno}} {{date | date: "h:mm a"}}</h2>
       </ion-col>
     </ion-row>
   </div>
@@ -52,8 +52,8 @@
                 <ion-row>
                   <ion-col class="time-col">
                     <span item-right>
-                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
-                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortTime'}}</h2>
+                      <h2 class="date" text-wrap>{{item.notification_date | date: 'shortDate'}}</h2>
+                      <h2 class="date" text-wrap>{{item.notification_time }}</h2>
                       <h2 class="date" text-wrap>{{item.reciever}}</h2>
                     </span>
                   </ion-col>
@@ -86,8 +86,8 @@
                 <ion-row>
                   <ion-col class="time-col">
                     <span item-right>
-                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortDate'}}</h2>
-                      <h2 class="date" text-wrap>{{item.push_date | date : 'shortTime'}}</h2>
+                      <h2 class="date" text-wrap>{{item.notification_date | date : "shortDate"}}</h2>
+                      <h2 class="date" text-wrap>{{item.notification_time }}</h2>
                       <h2 class="date" text-wrap>{{item.reciever}}</h2>
                     </span>
                   </ion-col>
